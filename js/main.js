@@ -59,6 +59,9 @@ function drawEntities() {
     }
 }
 
+// Changes velocity on all entities, that
+// have gravity and velocity.
+// Simulates gravity.
 function applyGravity() {
     for (let i = 0; i < entities.length; i++) {
         const entity = entities[i];
