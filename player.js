@@ -1,24 +1,30 @@
 class Player {
     constructor() {
-        this.x = 0;
-        this.y = 0;
-        this.w = 32;
-        this.h = 32;
-        this.speed = 5;
+        this.position = {
+            x: 0,
+            y: 0,
+        };
+        this.size = {
+            w: 32,
+            h: 32,
+        };
         this.velocity = {
             x: 0,
             y: 0,
-        }
+        };
+        this.speed = 5;
     }
 
     update() {
-        this.x += this.velocity.x;
-        this.y += this.velocity.y;
         this.velocity.y += 0.2;
-
     }
 
     draw() {
-        rect(player.x, player.y, player.w, player.h);
+        rect(
+            player.position.x,
+            player.position.y,
+            player.size.w,
+            player.size.h,
+        );
     }
 }
