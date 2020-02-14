@@ -4,6 +4,11 @@ class Player {
         this.y = 0;
         this.w = 32;
         this.h = 32;
+        this.speed = 5;
+    }
+
+    update() {
+        this.x += this.speed;
     }
 
     draw() {
