@@ -6,6 +6,10 @@ function setup() {
 
     player = new Player();
     entities.push(player);
+
+    entities.push(new Block(32, 32));
+    entities.push(new Block(64, 32));
+    entities.push(new Block(32, 64));
 }
 
 function update() {
