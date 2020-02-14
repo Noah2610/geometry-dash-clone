@@ -18,13 +18,4 @@ class Player {
     update() {
         this.velocity.y += 0.2;
     }
-
-    draw() {
-        rect(
-            player.position.x,
-            player.position.y,
-            player.size.w,
-            player.size.h,
-        );
-    }
 }
