@@ -35,10 +35,15 @@ function moveEntities() {
 
 // Draws all entities as rectangles,
 // that have a position and a size.
+// Draws the entity with a color,
+// if the enity has a color.
 function drawEntities() {
     for (let i = 0; i < entities.length; i++) {
         const entity = entities[i];
         if (entity.position && entity.size) {
+            if (entity.color) {
+                fill(entity.color);
+            }
             rect(
                 entity.position.x,
                 entity.position.y,

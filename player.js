@@ -12,6 +12,7 @@ class Player {
             x: 0,
             y: 0,
         };
+        this.color = [200, 50, 50];
         this.speed = 5;
     }
 
