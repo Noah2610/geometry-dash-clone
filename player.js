@@ -5,10 +5,17 @@ class Player {
         this.w = 32;
         this.h = 32;
         this.speed = 5;
+        this.velocity = {
+            x: 0,
+            y: 0,
+        }
     }
 
     update() {
-        this.x += this.speed;
+        this.x += this.velocity.x;
+        this.y += this.velocity.y;
+        this.velocity.y += 0.2;
+
     }
 
     draw() {
