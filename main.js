@@ -14,6 +14,7 @@ function setup() {
 
 function update() {
     player.update();
+    applyGravity();
     moveEntities();
 }
 
@@ -54,6 +55,15 @@ function drawEntities() {
                 entity.size.w,
                 entity.size.h,
             );
+        }
+    }
+}
+
+function applyGravity() {
+    for (let i = 0; i < entities.length; i++) {
+        const entity = entities[i];
+        if (entity.gravity && entity.velocity) {
+            entity.velocity.y += entity.gravity;
         }
     }
 }
