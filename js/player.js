@@ -9,7 +9,7 @@ class Player {
             h: 32,
         };
         this.velocity = {
-            x: 0,
+            x: 5,
             y: 0,
         };
         this.color = [200, 50, 50];
