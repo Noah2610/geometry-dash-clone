@@ -3,6 +3,7 @@ const entities = [];
 
 function setup() {
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
+    rectMode(CENTER);
 
     player = new Player();
     entities.push(player);
@@ -10,6 +11,14 @@ function setup() {
     entities.push(new Block(32, 32));
     entities.push(new Block(64, 32));
     entities.push(new Block(32, 64));
+
+    const blockOne = new Block(0, 0);
+    entities.push(blockOne);
+    const blockTwo = new Block(16, 16);
+    entities.push(blockTwo);
+
+    console.log(doEntitiesCollide(blockOne, blockTwo));
+
 }
 
 function update() {
@@ -31,7 +40,9 @@ function draw() {
 function moveEntities() {
     for (let i = 0; i < entities.length; i++) {
         const entity = entities[i];
-        if (entity.position && entity.velocity) {
+        if (entity.position && entity.velocity && entity.solid) {
+            //if(entity.position.x == entity.position.x && entity.position.y)
+        } else if (entity.position && entity.velocity) {
             entity.position.x += entity.velocity.x;
             entity.position.y += entity.velocity.y;
         }
@@ -69,4 +80,42 @@ function applyGravity() {
             entity.velocity.y += entity.gravity;
         }
     }
+}
+
+
+function doEntitiesCollide(entityOne, entityTwo) {
+    if (!(entityOne.position && entityOne.size && entityTwo.position && entityTwo.size)) {
+        return false;
+    }
+    const rectOne = new Rect(entityOne.position, entityOne.size);
+    const rectTwo = new Rect(entityTwo.position, entityTwo.size);
+
+    return (
+        (
+            rectOne.left >= rectTwo.left &&
+            rectOne.left < rectTwo.right
+        ) || (
+            rectOne.left <= rectTwo.left && 
+            rectOne.right > rectTwo.left
+        )
+    ) && (
+        (
+            rectOne.top >= rectTwo.top &&
+            rectOne.top < rectTwo.bottom
+        ) || (
+            rectOne.top <= rectTwo.top &&
+            rectOne.bottom > rectTwo.top
+        )
+    );
+}
+
+class Rect {
+   constructor(position, size) {
+        
+            this.top = position.y - size.h / 2;
+            this.bottom = position.y + size.h / 2;
+            this.left =  position.x - size.w / 2;
+            this.right =  position.x + size.w / 2;
+        ;
+   } 
 }

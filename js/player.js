@@ -15,6 +15,7 @@ class Player {
         this.color = [200, 50, 50];
         this.speed = 5;
         this.gravity = 0.2;
+        this.solid = new Solid();
     }
 
     update() {
