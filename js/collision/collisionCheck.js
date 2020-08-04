@@ -23,3 +23,17 @@ function doEntitiesCollide(entityOne, entityTwo) {
         )
     );
 }
+
+function collide(entityOne, entityTwo) { //(entityI)
+    /*if(!(doEntitiesCollide(entityOne, entityTwo))) {
+        return;
+    }
+
+    if(entityOne.solid && !(entityTwo.solid) || !(entityOne.solid) && entityTwo.solid) { //rectOne/Two vielleicht
+        entityOne.veloyity.y = 0;
+    }
+    if(entityI) {
+
+    }*/
+    
+}
