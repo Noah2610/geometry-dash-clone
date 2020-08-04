@@ -8,10 +8,7 @@ function setup() {
     player = new Player();
     entities.push(player);
 
-/*
-    entities.push(new Block(32, 32));
-    entities.push(new Block(64, 32));
-    entities.push(new Block(32, 64));*/
+    //entities.push(new Block(96, 0));
     entities.push(new Block(32, 320));
     entities.push(new Block(64, 320));
     entities.push(new Block(96, 320));
@@ -23,7 +20,14 @@ function setup() {
     entities.push(new Block(288, 320));
     entities.push(new Block(320, 320));
     entities.push(new Block(352, 320));
+    //entities.push(new Block(352, 288));
     entities.push(new Block(384, 320));
+    entities.push(new Block(416, 320));
+    entities.push(new Block(448, 320));
+    entities.push(new Block(480, 320));
+    entities.push(new Block(512, 320));
+    entities.push(new Block(544, 320));
+    entities.push(new Block(576, 320));
 /*
     const blockOne = new Block(0, 0);
     entities.push(blockOne);
@@ -40,7 +44,7 @@ function setup() {
 
 function update() {
     player.update();
-    applyGravity();
+    //applyGravity();
     moveEntities();
 }
 
@@ -74,12 +78,16 @@ function moveEntities() {
                 if(entity.id !== entity2.id) {
                     if (doEntitiesCollide(tmpEntity, entity2)) {
                         canMove = false;
+                        entity.velocity.y = 0;
+                        jump();
+                                //hier ist kein gravity
                         break;
                     }
                 }
             }
             if (canMove) {
                 entity.position = newposition;
+                applyGravity();
             }
         } else if (entity.position && entity.velocity) {
             entity.position.x += entity.velocity.x;
@@ -118,5 +126,12 @@ function applyGravity() {
         if (entity.gravity && entity.velocity) {
             entity.velocity.y += entity.gravity;
         }
+    }
+}
+
+//Player jumps when the button "j" is pressed
+function jump() {
+    if(keyIsDown(74)) { // 74 ... j
+        entities[0].velocity.y -= 4;
     }
 }
