@@ -14,9 +14,9 @@ function setup() {
     entities.push(new Block(96, 320));
     entities.push(new Block(128, 320));
     entities.push(new Block(160, 320));
-    entities.push(new Block(192, 320)); 
+    entities.push(new Block(192, 320));
     entities.push(new Block(224, 320));
-    entities.push(new Block(256, 320));   
+    entities.push(new Block(256, 320));
     entities.push(new Block(288, 320));
     entities.push(new Block(320, 320));
     entities.push(new Block(352, 320));
@@ -28,7 +28,7 @@ function setup() {
     entities.push(new Block(512, 320));
     entities.push(new Block(544, 320));
     entities.push(new Block(576, 320));
-/*
+    /*
     const blockOne = new Block(0, 0);
     entities.push(blockOne);
     const blockTwo = new Block(16, 16);
@@ -36,8 +36,7 @@ function setup() {
 
     console.log(doEntitiesCollide(blockOne, blockTwo));*/
 
-
-    for(let i = 0; i < entities.length; i++) {
+    for (let i = 0; i < entities.length; i++) {
         entities[i].id = i;
     }
 }
@@ -73,14 +72,14 @@ function moveEntities() {
                 position: newposition,
                 size: entity.size,
             };
-            for(let j = 0; j < entities.length; j++) {
+            for (let j = 0; j < entities.length; j++) {
                 const entity2 = entities[j];
-                if(entity.id !== entity2.id) {
+                if (entity.id !== entity2.id) {
                     if (doEntitiesCollide(tmpEntity, entity2)) {
                         canMove = false;
                         entity.velocity.y = 0;
                         jump();
-                                //hier ist kein gravity
+                        //hier ist kein gravity
                         break;
                     }
                 }
@@ -111,7 +110,7 @@ function drawEntities() {
                 entity.position.x,
                 entity.position.y,
                 entity.size.w,
-                entity.size.h,
+                entity.size.h
             );
         }
     }
@@ -131,7 +130,8 @@ function applyGravity() {
 
 //Player jumps when the button "j" is pressed
 function jump() {
-    if(keyIsDown(74)) { // 74 ... j
+    if (keyIsDown(74)) {
+        // 74 ... j
         entities[0].velocity.y -= 4;
     }
 }
