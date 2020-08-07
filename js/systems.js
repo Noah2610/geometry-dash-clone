@@ -31,9 +31,8 @@ function moveEntity(entity) {
                     doEntitiesCollide(targetEntity, otherEntity)
             );
 
-        let inCollision = false;
         for (const axis of ["x", "y"]) {
-            if (inCollision) break;
+            let inCollision = false;
             for (let i = 1; i <= Math.floor(Math.abs(velocity[axis])); i++) {
                 const newPos = {
                     x: entity.position.x,
@@ -69,13 +68,10 @@ function moveEntity(entity) {
                     entity.position = newPos;
                 }
             }
-        }
 
-        if (inCollision) {
-            entity.velocity = {
-                x: 0.0,
-                y: 0.0,
-            };
+            if (inCollision) {
+                entity.velocity[axis] = 0.0;
+            }
         }
     } else if (entity.position && entity.velocity) {
         entity.position.x += velocity.x * DT;
@@ -95,9 +91,18 @@ function applyGravity(entity) {
 // Player jumps when the button "j" is pressed
 function checkJump(entity) {
     const PADDING = 2.0;
-    const JUMP_STRENGTH = 10.0;
+    const JUMP_STRENGTH = 14.0;
 
-    if (!entity.canJump || !entity.velocity) return;
+    if (
+        !(
+            entity.canJump &&
+            entity.velocity &&
+            keyIsDown(74) &&
+            entity.velocity.y >= 0.0
+        )
+    ) {
+        return;
+    }
 
     const checkEntity = {
         position: {
@@ -116,6 +121,6 @@ function checkJump(entity) {
     );
 
     if (isStandingOnGround && keyIsDown(74)) {
-        entity.velocity.y -= JUMP_STRENGTH * DT;
+        entity.velocity.y = -JUMP_STRENGTH;
     }
 }
