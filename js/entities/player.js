@@ -1,6 +1,6 @@
 class Player {
     constructor() {
-        this.SPEED = 2.0;
+        this.SPEED = 3.0;
 
         this.position = {
             x: 0,

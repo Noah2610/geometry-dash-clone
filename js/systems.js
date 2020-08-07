@@ -94,10 +94,28 @@ function applyGravity(entity) {
 
 // Player jumps when the button "j" is pressed
 function checkJump(entity) {
-    if (entity.canJump && entity.velocity) {
-        if (keyIsDown(74)) {
-            // 74 ... j
-            entity.velocity.y -= 4;
-        }
+    const PADDING = 2.0;
+    const JUMP_STRENGTH = 10.0;
+
+    if (!entity.canJump || !entity.velocity) return;
+
+    const checkEntity = {
+        position: {
+            x: entity.position.x,
+            y: entity.position.y + PADDING,
+        },
+        size: entity.size,
+    };
+    const isStandingOnGround = entities.some(
+        otherEntity =>
+            otherEntity.solid &&
+            otherEntity.position &&
+            otherEntity.size &&
+            entity.id !== otherEntity.id &&
+            doEntitiesCollide(checkEntity, otherEntity)
+    );
+
+    if (isStandingOnGround && keyIsDown(74)) {
+        entity.velocity.y -= JUMP_STRENGTH;
     }
 }
