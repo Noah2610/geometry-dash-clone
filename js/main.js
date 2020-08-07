@@ -2,6 +2,7 @@ let player;
 const entities = [];
 
 function setup() {
+    frameRate(30);
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
     rectMode(CENTER);
 
@@ -74,52 +75,54 @@ function moveEntity(entity) {
             y: Math.sign(entity.velocity.y),
         };
 
+        const doesEntityCollide = targetEntity =>
+            entities.some(
+                otherEntity =>
+                    otherEntity.solid &&
+                    entity.id !== otherEntity.id &&
+                    doEntitiesCollide(targetEntity, otherEntity)
+            );
+
         let inCollision = false;
-        for (const otherEntity of entities) {
+        for (const axis of ["x", "y"]) {
             if (inCollision) break;
-            if (otherEntity.solid && entity.id !== otherEntity.id) {
-                for (const axis of ["x", "y"]) {
-                    if (inCollision) break;
-                    for (
-                        let i = 1;
-                        i <= Math.floor(Math.abs(entity.velocity[axis]));
-                        i++
-                    ) {
-                        const newPos = {
-                            x: entity.position.x,
-                            y: entity.position.y,
-                        };
-                        newPos[axis] += velSign[axis];
-                        const tmpEntity = {
-                            position: newPos,
-                            size: entity.size,
-                        };
-                        if (doEntitiesCollide(tmpEntity, otherEntity)) {
-                            inCollision = true;
-                            break;
-                        } else {
-                            entity.position = newPos;
-                        }
-                    }
-                    if (inCollision) break;
-                    if (velRem[axis] > 0.0 || velRem[axis] < 0.0) {
-                        const newPos = {
-                            x: entity.position.x,
-                            y: entity.position.y,
-                        };
-                        newPos[axis] += velRem[axis];
-                        const tmpEntity = {
-                            position: newPos,
-                            size: entity.size,
-                        };
-                        if (doEntitiesCollide(tmpEntity, otherEntity)) {
-                            inCollision = true;
-                            break;
-                        } else {
-                            // if (keyIsDown(74)) debugger;
-                            entity.position = newPos;
-                        }
-                    }
+            for (
+                let i = 1;
+                i <= Math.floor(Math.abs(entity.velocity[axis]));
+                i++
+            ) {
+                const newPos = {
+                    x: entity.position.x,
+                    y: entity.position.y,
+                };
+                newPos[axis] += velSign[axis];
+                const tmpEntity = {
+                    position: newPos,
+                    size: entity.size,
+                };
+                if (doesEntityCollide(tmpEntity)) {
+                    inCollision = true;
+                    break;
+                } else {
+                    entity.position = newPos;
+                }
+            }
+            if (inCollision) break;
+            if (velRem[axis] > 0.0 || velRem[axis] < 0.0) {
+                const newPos = {
+                    x: entity.position.x,
+                    y: entity.position.y,
+                };
+                newPos[axis] += velRem[axis];
+                const tmpEntity = {
+                    position: newPos,
+                    size: entity.size,
+                };
+                if (doesEntityCollide(tmpEntity)) {
+                    inCollision = true;
+                    break;
+                } else {
+                    entity.position = newPos;
                 }
             }
         }
