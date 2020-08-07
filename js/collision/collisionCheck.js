@@ -1,16 +1,24 @@
 function doEntitiesCollide(entityOne, entityTwo) {
-    if (!(entityOne.position && entityOne.size && entityTwo.position && entityTwo.size)) {
+    if (
+        !(
+            entityOne.position &&
+            entityOne.size &&
+            entityTwo.position &&
+            entityTwo.size
+        )
+    ) {
         return false;
     }
     const rectOne = new Rect(entityOne.position, entityOne.size);
     const rectTwo = new Rect(entityTwo.position, entityTwo.size);
 
+    // prettier-ignore
     return (
         (
             rectOne.left >= rectTwo.left &&
             rectOne.left < rectTwo.right
         ) || (
-            rectOne.left <= rectTwo.left && 
+            rectOne.left <= rectTwo.left &&
             rectOne.right > rectTwo.left
         )
     ) && (
@@ -22,18 +30,4 @@ function doEntitiesCollide(entityOne, entityTwo) {
             rectOne.bottom > rectTwo.top
         )
     );
-}
-
-function collide(entityOne, entityTwo) { //(entityI)
-    /*if(!(doEntitiesCollide(entityOne, entityTwo))) {
-        return;
-    }
-
-    if(entityOne.solid && !(entityTwo.solid) || !(entityOne.solid) && entityTwo.solid) { //rectOne/Two vielleicht
-        entityOne.veloyity.y = 0;
-    }
-    if(entityI) {
-
-    }*/
-    
 }

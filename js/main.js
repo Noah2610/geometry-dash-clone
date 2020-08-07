@@ -43,8 +43,14 @@ function setup() {
 
 function update() {
     player.update();
-    //applyGravity();
-    moveEntities();
+
+    // Loop through all entities and run functions for each.
+    for (let i = 0; i < entities.length; i++) {
+        const entity = entities[i];
+        applyGravity(entity);
+        checkJump(entity);
+        moveEntity(entity);
+    }
 }
 
 function draw() {
@@ -57,41 +63,76 @@ function draw() {
 
 // Moves all entities (Player, etc.) that,
 // have a position and a velocity.
-function moveEntities() {
-    for (let i = 0; i < entities.length; i++) {
-        const entity = entities[i];
-        if (entity.position && entity.velocity && entity.solid) {
-            let canMove = true;
-            const newposition = {
-                x: entity.position.x,
-                y: entity.position.y,
-            };
-            newposition.x += entity.velocity.x;
-            newposition.y += entity.velocity.y;
-            const tmpEntity = {
-                position: newposition,
-                size: entity.size,
-            };
-            for (let j = 0; j < entities.length; j++) {
-                const entity2 = entities[j];
-                if (entity.id !== entity2.id) {
-                    if (doEntitiesCollide(tmpEntity, entity2)) {
-                        canMove = false;
-                        entity.velocity.y = 0;
-                        jump();
-                        //hier ist kein gravity
-                        break;
+function moveEntity(entity) {
+    if (entity.position && entity.velocity && entity.solid) {
+        const velRem = {
+            x: entity.velocity.x % 1.0,
+            y: entity.velocity.y % 1.0,
+        };
+        const velSign = {
+            x: Math.sign(entity.velocity.x),
+            y: Math.sign(entity.velocity.y),
+        };
+
+        let inCollision = false;
+        for (const otherEntity of entities) {
+            if (inCollision) break;
+            if (otherEntity.solid && entity.id !== otherEntity.id) {
+                for (const axis of ["x", "y"]) {
+                    if (inCollision) break;
+                    for (
+                        let i = 1;
+                        i <= Math.floor(Math.abs(entity.velocity[axis]));
+                        i++
+                    ) {
+                        const newPos = {
+                            x: entity.position.x,
+                            y: entity.position.y,
+                        };
+                        newPos[axis] += velSign[axis];
+                        const tmpEntity = {
+                            position: newPos,
+                            size: entity.size,
+                        };
+                        if (doEntitiesCollide(tmpEntity, otherEntity)) {
+                            inCollision = true;
+                            break;
+                        } else {
+                            entity.position = newPos;
+                        }
+                    }
+                    if (inCollision) break;
+                    if (velRem[axis] > 0.0 || velRem[axis] < 0.0) {
+                        const newPos = {
+                            x: entity.position.x,
+                            y: entity.position.y,
+                        };
+                        newPos[axis] += velRem[axis];
+                        const tmpEntity = {
+                            position: newPos,
+                            size: entity.size,
+                        };
+                        if (doEntitiesCollide(tmpEntity, otherEntity)) {
+                            inCollision = true;
+                            break;
+                        } else {
+                            // if (keyIsDown(74)) debugger;
+                            entity.position = newPos;
+                        }
                     }
                 }
             }
-            if (canMove) {
-                entity.position = newposition;
-                applyGravity();
-            }
-        } else if (entity.position && entity.velocity) {
-            entity.position.x += entity.velocity.x;
-            entity.position.y += entity.velocity.y;
         }
+
+        if (inCollision) {
+            entity.velocity = {
+                x: 0.0,
+                y: 0.0,
+            };
+        }
+    } else if (entity.position && entity.velocity) {
+        entity.position.x += entity.velocity.x;
+        entity.position.y += entity.velocity.y;
     }
 }
 
@@ -119,19 +160,18 @@ function drawEntities() {
 // Changes velocity on all entities, that
 // have gravity and velocity.
 // Simulates gravity.
-function applyGravity() {
-    for (let i = 0; i < entities.length; i++) {
-        const entity = entities[i];
-        if (entity.gravity && entity.velocity) {
-            entity.velocity.y += entity.gravity;
-        }
+function applyGravity(entity) {
+    if (entity.gravity && entity.velocity) {
+        entity.velocity.y += entity.gravity;
     }
 }
 
-//Player jumps when the button "j" is pressed
-function jump() {
-    if (keyIsDown(74)) {
-        // 74 ... j
-        entities[0].velocity.y -= 4;
+// Player jumps when the button "j" is pressed
+function checkJump(entity) {
+    if (entity.canJump && entity.velocity) {
+        if (keyIsDown(74)) {
+            // 74 ... j
+            entity.velocity.y -= 4;
+        }
     }
 }

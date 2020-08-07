@@ -9,6 +9,6 @@ class Block {
             h: 32,
         };
         this.color = [255, 0, 0];
-        this.solid = new Solid();
+        this.solid = true;
     }
 }
