@@ -50,8 +50,8 @@ function moveEntity(entity) {
                     entity.position = newPos;
                 }
             }
-            if (inCollision) break;
-            if (velRem[axis] > 0.0 || velRem[axis] < 0.0) {
+
+            if (!inCollision && (velRem[axis] > 0.0 || velRem[axis] < 0.0)) {
                 const newPos = {
                     x: entity.position.x,
                     y: entity.position.y,
