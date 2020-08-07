@@ -10,13 +10,17 @@
 // have a position and a velocity.
 function moveEntity(entity) {
     if (entity.position && entity.velocity && entity.solid) {
+        const velocity = {
+            x: entity.velocity.x * DT,
+            y: entity.velocity.y * DT,
+        };
         const velRem = {
-            x: entity.velocity.x % 1.0,
-            y: entity.velocity.y % 1.0,
+            x: velocity.x % 1.0,
+            y: velocity.y % 1.0,
         };
         const velSign = {
-            x: Math.sign(entity.velocity.x),
-            y: Math.sign(entity.velocity.y),
+            x: Math.sign(velocity.x),
+            y: Math.sign(velocity.y),
         };
 
         const doesEntityCollide = targetEntity =>
@@ -30,11 +34,7 @@ function moveEntity(entity) {
         let inCollision = false;
         for (const axis of ["x", "y"]) {
             if (inCollision) break;
-            for (
-                let i = 1;
-                i <= Math.floor(Math.abs(entity.velocity[axis]));
-                i++
-            ) {
+            for (let i = 1; i <= Math.floor(Math.abs(velocity[axis])); i++) {
                 const newPos = {
                     x: entity.position.x,
                     y: entity.position.y,
@@ -78,8 +78,8 @@ function moveEntity(entity) {
             };
         }
     } else if (entity.position && entity.velocity) {
-        entity.position.x += entity.velocity.x;
-        entity.position.y += entity.velocity.y;
+        entity.position.x += velocity.x * DT;
+        entity.position.y += velocity.y * DT;
     }
 }
 
@@ -116,6 +116,6 @@ function checkJump(entity) {
     );
 
     if (isStandingOnGround && keyIsDown(74)) {
-        entity.velocity.y -= JUMP_STRENGTH;
+        entity.velocity.y -= JUMP_STRENGTH * DT;
     }
 }

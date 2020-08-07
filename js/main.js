@@ -1,6 +1,10 @@
 let player;
 const entities = [];
 
+// Deltatime.
+// Difference in seconds to previous frame.
+let DT = 0.0;
+
 function setup() {
     frameRate(30);
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
@@ -36,6 +40,8 @@ function createEntity(entity) {
 }
 
 function update() {
+    DT = deltaTime / 100.0;
+
     player.update();
 
     // Loop through all entities and run functions for each.
