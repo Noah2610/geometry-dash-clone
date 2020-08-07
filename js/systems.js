@@ -91,7 +91,7 @@ function applyGravity(entity) {
 // Player jumps when the button "j" is pressed
 function checkJump(entity) {
     const PADDING = 2.0;
-    const JUMP_STRENGTH = 14.0;
+    const JUMP_STRENGTH = 40.0;
 
     if (
         !(
