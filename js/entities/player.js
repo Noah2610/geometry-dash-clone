@@ -15,7 +15,7 @@ class Player {
             y: 0,
         };
         this.color = [200, 50, 50];
-        this.gravity = 0.05;
+        this.gravity = 0.5;
         this.solid = true;
         this.canJump = true;
     }
