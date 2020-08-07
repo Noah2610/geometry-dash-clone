@@ -31,7 +31,7 @@ const TILE_SIZE = {
     h: 32.0,
 };
 
-function loadLevel(raw) {
+function loadLevel(raw = LEVEL_RAW) {
     player = null;
     camera = { x: 0.0, y: 0.0 };
     entities = [];

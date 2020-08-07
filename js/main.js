@@ -1,50 +1,44 @@
 let player;
 let camera;
 let entities = [];
+let state = "menu"; // "menu" or "game"
 
 // Deltatime.
 // Difference in seconds to previous frame.
 let DT = 0.0;
+
+function switchState(newState) {
+    switch (newState) {
+        case "game":
+            state = "game";
+            hideMenu();
+            loadLevel();
+            break;
+        case "menu":
+            state = "menu";
+            showMenu();
+            break;
+        default:
+            console.error(`Invalid state: ${newState}`);
+    }
+}
+
+function hideMenu() {
+    document.getElementById("menu").classList.add("hide");
+}
+
+function showMenu() {
+    document.getElementById("menu").classList.remove("hide");
+}
 
 function setup() {
     frameRate(30);
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
     rectMode(CENTER);
 
-    loadLevel(LEVEL_RAW);
-
-    // player = new Player();
-    // createEntity(player);
-
-    // camera = {
-    //     x: player.position.x,
-    //     y: player.position.y,
-    // };
-
-    // GROUND PLAIN
-    // for (let i = 0; i < 200; i++) {
-    //     createEntity(new Block(32.0 * i, 368.0));
-    // }
-
-    // createEntity(new Block(32, 320));
-    // createEntity(new Block(64, 320));
-    // createEntity(new Block(96, 320));
-    // createEntity(new Block(128, 320));
-    // createEntity(new Block(160, 320));
-    // createEntity(new Block(192, 320));
-    // createEntity(new Block(224, 320));
-    // createEntity(new Block(256, 320));
-    // createEntity(new Block(288, 320));
-    // createEntity(new Block(320, 320));
-    // createEntity(new Block(352, 320));
-    // createEntity(new Block(352, 288));
-    // createEntity(new Block(384, 320));
-    // createEntity(new Block(416, 320));
-    // createEntity(new Block(448, 320));
-    // createEntity(new Block(480, 320));
-    // createEntity(new Block(512, 320));
-    // createEntity(new Block(544, 320));
-    // createEntity(new Block(576, 320));
+    document.getElementById("start-btn").onclick = function() {
+        switchState("game");
+    };
 }
 
 function createEntity(entity) {
