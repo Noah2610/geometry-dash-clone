@@ -1,4 +1,5 @@
 let player;
+let camera;
 const entities = [];
 
 // Deltatime.
@@ -13,25 +14,35 @@ function setup() {
     player = new Player();
     createEntity(player);
 
-    createEntity(new Block(32, 320));
-    createEntity(new Block(64, 320));
-    createEntity(new Block(96, 320));
-    createEntity(new Block(128, 320));
-    createEntity(new Block(160, 320));
-    createEntity(new Block(192, 320));
-    createEntity(new Block(224, 320));
-    createEntity(new Block(256, 320));
-    createEntity(new Block(288, 320));
-    createEntity(new Block(320, 320));
-    createEntity(new Block(352, 320));
-    createEntity(new Block(352, 288));
-    createEntity(new Block(384, 320));
-    createEntity(new Block(416, 320));
-    createEntity(new Block(448, 320));
-    createEntity(new Block(480, 320));
-    createEntity(new Block(512, 320));
-    createEntity(new Block(544, 320));
-    createEntity(new Block(576, 320));
+    camera = {
+        x: player.position.x,
+        y: player.position.y,
+    };
+
+    // GROUND PLAIN
+    for (let i = 0; i < 200; i++) {
+        createEntity(new Block(32.0 * i, 368.0));
+    }
+
+    // createEntity(new Block(32, 320));
+    // createEntity(new Block(64, 320));
+    // createEntity(new Block(96, 320));
+    // createEntity(new Block(128, 320));
+    // createEntity(new Block(160, 320));
+    // createEntity(new Block(192, 320));
+    // createEntity(new Block(224, 320));
+    // createEntity(new Block(256, 320));
+    // createEntity(new Block(288, 320));
+    // createEntity(new Block(320, 320));
+    // createEntity(new Block(352, 320));
+    // createEntity(new Block(352, 288));
+    // createEntity(new Block(384, 320));
+    // createEntity(new Block(416, 320));
+    // createEntity(new Block(448, 320));
+    // createEntity(new Block(480, 320));
+    // createEntity(new Block(512, 320));
+    // createEntity(new Block(544, 320));
+    // createEntity(new Block(576, 320));
 }
 
 function createEntity(entity) {
@@ -71,8 +82,8 @@ function drawEntities() {
                 fill(entity.color);
             }
             rect(
-                entity.position.x,
-                entity.position.y,
+                entity.position.x - camera.x,
+                entity.position.y - camera.y,
                 entity.size.w,
                 entity.size.h
             );

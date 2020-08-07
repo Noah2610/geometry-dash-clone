@@ -23,11 +23,15 @@ class Player {
     update() {
         this.velocity.x = this.SPEED;
 
+        // TODO: don't do this here
+        camera.x = this.position.x - width / 2.0;
+        camera.y = this.position.y - height / 2.0;
+
+        // DEBUG MOVEMENT
         const move = {
             x: +keyIsDown("D".charCodeAt(0)) - keyIsDown("A".charCodeAt()),
             y: +keyIsDown("S".charCodeAt(0)) - keyIsDown("W".charCodeAt()),
         };
-
         if (move.x !== 0) {
             this.velocity.x = this.SPEED * move.x;
         }
