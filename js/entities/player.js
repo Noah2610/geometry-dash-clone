@@ -1,10 +1,10 @@
 class Player {
-    constructor() {
+    constructor(x = 0.0, y = 0.0) {
         this.SPEED = 20.0;
 
         this.position = {
-            x: 0,
-            y: 0,
+            x: x,
+            y: y,
         };
         this.size = {
             w: 32,

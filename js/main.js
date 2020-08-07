@@ -1,6 +1,6 @@
 let player;
 let camera;
-const entities = [];
+let entities = [];
 
 // Deltatime.
 // Difference in seconds to previous frame.
@@ -11,18 +11,20 @@ function setup() {
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
     rectMode(CENTER);
 
-    player = new Player();
-    createEntity(player);
+    loadLevel(LEVEL_RAW);
 
-    camera = {
-        x: player.position.x,
-        y: player.position.y,
-    };
+    // player = new Player();
+    // createEntity(player);
+
+    // camera = {
+    //     x: player.position.x,
+    //     y: player.position.y,
+    // };
 
     // GROUND PLAIN
-    for (let i = 0; i < 200; i++) {
-        createEntity(new Block(32.0 * i, 368.0));
-    }
+    // for (let i = 0; i < 200; i++) {
+    //     createEntity(new Block(32.0 * i, 368.0));
+    // }
 
     // createEntity(new Block(32, 320));
     // createEntity(new Block(64, 320));
@@ -53,7 +55,9 @@ function createEntity(entity) {
 function update() {
     DT = deltaTime / 100.0;
 
-    player.update();
+    if (player) {
+        player.update();
+    }
 
     // Loop through all entities and run functions for each.
     for (let i = 0; i < entities.length; i++) {
