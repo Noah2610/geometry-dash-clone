@@ -1,48 +1,68 @@
 // Moves the given entity (Player, etc.) that,
 // has a position and a velocity.
 function moveEntity(entity) {
-        if (entity.position && entity.velocity && entity.solid) {
-            let canMove = true;
-            const newposition = {
-                x: entity.position.x,
-                y: entity.position.y,
-            };
-            newposition.x += entity.velocity.x;
-            newposition.y += entity.velocity.y;
-            const tmpEntity = {
-                position: newposition,
-                size: entity.size,
-            };
-            for(let j = 0; j < entities.length; j++) {
-                const entity2 = entities[j];
-                if(entity.id !== entity2.id) {
-                    if(collideB(tmpEntity, entity2)) {
-                        //console.log("JA");
-                        console.log("Juhu");
-                        //break;
-                    }
-                    if(collideLR(tmpEntity, entity2)) {
-                        //console.log("JA");
-                        console.log("Jap");
-                        //break;
-                    }
-                    if (doEntitiesCollide(tmpEntity, entity2)) {
-                        canMove = false;
-                        entity.velocity.y = 0;
-                        checkJump();
-                        //console.log("Hää"); 
-                        appylGravityAway(); //hier wäre kein gravity
-                        break;
-                    } 
+    if (entity.position && entity.velocity && entity.solid) {
+        const velRem = {
+            x: entity.velocity.x % 1.0,
+            y: entity.velocity.y % 1.0
+        }
+        const velSign = {
+            x: Math.sign(entity.velocity.x),
+            y: Math.sign(entity.velocity.y),
+        }
+        function doesEntityCollide(targetEntity) {
+            return entities.some(function (otherEntity) {
+                return (
+                    otherEntity.solid &&
+                    entity.id !== otherEntity.id &&
+                    doEntitiesCollide(targetEntity, otherEntity)
+                );
+            });
+        }
+        ["x", "y"].forEach(function (axis) {
+            let inCollision = false;
+            const pixels = Math.floor(Math.abs(entity.velocity[axis]));
+            for (let i = 0; i < pixels; i++) {
+                const newPos = {
+                    x: entity.position.x,
+                    y: entity.position.y,
+                }
+                newPos[axis] += velSign[axis];
+                const tmpEntity = {
+                    position: newPos,
+                    size: entity.size,
+                }
+                if(doesEntityCollide(tmpEntity)) {
+                    inCollision = true;
+                    break;
+                } else {
+                    entity.position[axis] = newPos[axis]
                 }
             }
-            if (canMove) {
-                entity.position = newposition;
+            if(!inCollision && velRem[axis] !== 0.0) {
+                const newPos = {
+                    x: entity.position.x,
+                    y: entity.position.y,
+                }
+                newPos[axis] += velRem[axis];
+                const tmpEntity = {
+                    position: newPos,
+                    size: entity.size,
+                }
+                if(doesEntityCollide(tmpEntity)) {
+                    inCollision = true;
+                } else {
+                    entity.position[axis] = newPos[axis]
+                }
             }
-        } else if (entity.position && entity.velocity) {
-            entity.position.x += entity.velocity.x;
-            entity.position.y += entity.velocity.y;
-        }
+            if(inCollision) {
+                entity.velocity[axis] = 0.0
+            }
+        })
+    } else if (entity.position && entity.velocity) {
+        entity.position.x += entity.velocity.x;
+        entity.position.y += entity.velocity.y;
+    }
 }
 
 // Draws all entities as rectangles,
