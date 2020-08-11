@@ -24,16 +24,25 @@ function doEntitiesCollide(entityOne, entityTwo) {
     );
 }
 
-function collide(entityOne, entityTwo) { //(entityI)
-    /*if(!(doEntitiesCollide(entityOne, entityTwo))) {
+function collideB(entityOne, entityTwo) { //B ... Bottom
+    if(!(doEntitiesCollide(entityOne, entityTwo))) {
         return;
     }
+    const rectOne = new Rect(entityOne.position, entityOne.size);
+    const rectTwo = new Rect(entityTwo.position, entityTwo.size);
 
-    if(entityOne.solid && !(entityTwo.solid) || !(entityOne.solid) && entityTwo.solid) { //rectOne/Two vielleicht
-        entityOne.veloyity.y = 0;
+    return rectOne.bottom > rectTwo.top;
+}
+
+function collideLR(entityOne, entityTwo) { //L ... Left, R ... Right
+    if(!(doEntitiesCollide(entityOne, entityTwo))) {
+        return;
     }
-    if(entityI) {
+    const rectOne = new Rect(entityOne.position, entityOne.size);
+    const rectTwo = new Rect(entityTwo.position, entityTwo.size);
 
-    }*/
-    
+    return rectOne.right > rectTwo.left ||
+            rectOne.left < rectTwo.right &&
+            rectOne.bottom < rectTwo.top &&
+            rectOne.top < rectTwo.bottom;
 }

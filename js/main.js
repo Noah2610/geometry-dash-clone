@@ -8,7 +8,7 @@ function setup() {
     player = new Player();
     entities.push(player);
 
-    //entities.push(new Block(96, 0));
+    //entities.push(new Block(96, 0)); //
     entities.push(new Block(32, 320));
     entities.push(new Block(64, 320));
     entities.push(new Block(96, 320));
@@ -20,10 +20,11 @@ function setup() {
     entities.push(new Block(288, 320));
     entities.push(new Block(320, 320));
     entities.push(new Block(352, 320));
-    //entities.push(new Block(352, 288));
+    entities.push(new Block(352, 288)); //
     entities.push(new Block(384, 320));
     entities.push(new Block(416, 320));
     entities.push(new Block(448, 320));
+    //entities.push(new Block(448, 288)); //
     entities.push(new Block(480, 320));
     entities.push(new Block(512, 320));
     entities.push(new Block(544, 320));
@@ -44,7 +45,7 @@ function setup() {
 
 function update() {
     player.update();
-    //applyGravity();
+    applyGravity();
     moveEntities();
 }
 
@@ -76,18 +77,28 @@ function moveEntities() {
             for(let j = 0; j < entities.length; j++) {
                 const entity2 = entities[j];
                 if(entity.id !== entity2.id) {
+                    if(collideBo(tmpEntity, entity2)) {
+                        //console.log("JA");
+                        console.log("Juhu");
+                        //break;
+                    }
+                    if(collideLR(tmpEntity, entity2)) {
+                        //console.log("JA");
+                        console.log("Jap");
+                        //break;
+                    }
                     if (doEntitiesCollide(tmpEntity, entity2)) {
                         canMove = false;
                         entity.velocity.y = 0;
-                        jump();
-                                //hier ist kein gravity
+                        checkJump();
+                        //console.log("Hää"); 
+                        appylGravityAway(); //hier wäre kein gravity
                         break;
-                    }
+                    } 
                 }
             }
             if (canMove) {
                 entity.position = newposition;
-                applyGravity();
             }
         } else if (entity.position && entity.velocity) {
             entity.position.x += entity.velocity.x;
@@ -129,9 +140,19 @@ function applyGravity() {
     }
 }
 
-//Player jumps when the button "j" is pressed
-function jump() {
-    if(keyIsDown(74)) { // 74 ... j
+//neu
+function appylGravityAway() {
+    for (let i = 0; i < entities.length; i++) {
+        const entity = entities[i];
+        if (entity.gravity && entity.gravity) {
+            entity.velocity.y -= entity.gravity;
+        }
+    }
+}
+
+//Player jumps when the button "Space" is pressed
+function checkJump() {
+    if(keyIsDown(32)) { // 32 ... Space
         entities[0].velocity.y -= 4;
     }
 }
