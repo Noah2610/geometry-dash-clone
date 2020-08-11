@@ -1,8 +1,8 @@
 class Player {
-    constructor() {
+    constructor(posX, posY) {
         this.position = {
-            x: 0,
-            y: 0,
+            x: posX,
+            y: posY,
         };
         this.size = {
             w: 32,
