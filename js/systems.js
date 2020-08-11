@@ -63,7 +63,6 @@ function moveEntity(entity) {
                 };
                 if (doesEntityCollide(tmpEntity)) {
                     inCollision = true;
-                    break;
                 } else {
                     entity.position = newPos;
                 }

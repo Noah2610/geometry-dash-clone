@@ -41,7 +41,10 @@ function loadLevel(raw = LEVEL_RAW) {
         const row = rows[y];
         for (let x = 0; x < row.length; x++) {
             let tile = row[x];
-            const pos = { x: x * TILE_SIZE.w, y: y * TILE_SIZE.h };
+            const pos = {
+                x: x * TILE_SIZE.w,
+                y: y * TILE_SIZE.h,
+            };
             switch (tile) {
                 case TILES.EMPTY:
                     break;
@@ -49,7 +52,6 @@ function loadLevel(raw = LEVEL_RAW) {
                     createEntity(new Block(pos.x, pos.y));
                     break;
                 case TILES.PLAYER:
-                    console.log(pos);
                     player = new Player(pos.x, pos.y);
                     createEntity(player);
                     break;
