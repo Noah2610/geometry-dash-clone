@@ -16,6 +16,7 @@ class Player {
         this.speed = 5;
         this.gravity = 0.2;
         this.solid = new Solid();
+        this.canJump = true;
     }
 
     update() {

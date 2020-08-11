@@ -96,8 +96,28 @@ function applyGravity(entity) {
 }
 
 //Player jumps when the button "Space" is pressed
-function checkJump() {
-    if(keyIsDown(32)) { // 32 ... Space
-        player.velocity.y -= 4;
+function checkJump(entity) {
+    if(entity.canJump && entity.velocity && entity.size) {
+        if(keyIsDown(32)) { // 32 ... Space
+            const checkEntity = {
+                position: {
+                    x: entity.position.x,
+                    y: entity.position.y + 1
+                },
+                size: entity.size
+            }
+            const isStandingOnGround = entities.some(function (otherEntity) {
+                return (
+                    otherEntity.solid &&
+                    otherEntity.position &&
+                    otherEntity.size &&
+                    entity.id !== otherEntity.id &&
+                    doEntitiesCollide(checkEntity, otherEntity)
+                );
+            });
+            if(isStandingOnGround) {
+                entity.velocity.y -= 4;
+            }
+        }
     }
 }

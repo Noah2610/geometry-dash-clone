@@ -45,9 +45,11 @@ function setup() {
 
 function update() {
     player.update();
+    
     for(let i = 0; i < entities.length; i++) {
         applyGravity(entities[i]);
         moveEntity(entities[i]);
+        checkJump(entities[i]);
     }
 }
 
