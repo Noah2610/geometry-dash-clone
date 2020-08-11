@@ -77,8 +77,8 @@ function drawEntities() {
                 fill(entity.color);
             }
             rect(
-                entity.position.x,
-                entity.position.y,
+                entity.position.x - camera.x,
+                entity.position.y - camera.y,
                 entity.size.w,
                 entity.size.h,
             );
