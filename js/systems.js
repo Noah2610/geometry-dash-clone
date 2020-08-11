@@ -116,7 +116,7 @@ function checkJump(entity) {
                 );
             });
             if(isStandingOnGround) {
-                entity.velocity.y -= 4;
+                entity.velocity.y -= 5;
             }
         }
     }

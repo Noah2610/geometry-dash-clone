@@ -20,6 +20,6 @@ class Player {
     }
 
     update() {
-        
+        this.velocity.x = 5;
     }
 }
