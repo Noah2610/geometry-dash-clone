@@ -89,28 +89,15 @@ function drawEntities() {
 // Changes velocity on all entities, that
 // have gravity and velocity.
 // Simulates gravity.
-function applyGravity() {
-    for (let i = 0; i < entities.length; i++) {
-        const entity = entities[i];
-        if (entity.gravity && entity.velocity) {
-            entity.velocity.y += entity.gravity;
-        }
-    }
-}
-
-//neu
-function appylGravityAway() {
-    for (let i = 0; i < entities.length; i++) {
-        const entity = entities[i];
-        if (entity.gravity && entity.gravity) {
-            entity.velocity.y -= entity.gravity;
-        }
+function applyGravity(entity) {
+    if (entity.gravity && entity.velocity) {
+        entity.velocity.y += entity.gravity;
     }
 }
 
 //Player jumps when the button "Space" is pressed
 function checkJump() {
     if(keyIsDown(32)) { // 32 ... Space
-        entities[0].velocity.y -= 4;
+        player.velocity.y -= 4;
     }
 }
