@@ -2,6 +2,10 @@ let player;
 let entities = [];
 let camera;
 
+/*function preload() {
+    img = loadImage('images/Block.png');
+}*/
+
 function setup() {
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
     rectMode(CENTER);
