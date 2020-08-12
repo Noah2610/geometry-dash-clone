@@ -10,5 +10,6 @@ class Block {
         };
         this.color = [255, 0, 0];
         this.solid = new Solid();
+        this.img = assets.blockImg;
     }
 }

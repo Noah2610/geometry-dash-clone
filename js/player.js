@@ -17,6 +17,7 @@ class Player {
         this.gravity = 0.2;
         this.solid = new Solid();
         this.canJump = true;
+        this.img = assets.playerImg;
     }
 
     update() {

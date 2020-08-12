@@ -1,14 +1,21 @@
 let player;
 let entities = [];
 let camera;
+let img;
+let assets = {
+    blockImg: null,
+    playerImg: null
+};
 
-/*function preload() {
-    img = loadImage('images/Block.png');
-}*/
+function preload() {
+    assets.blockImg = loadImage('images/Block.png');
+    assets.playerImg = loadImage('images/Player.png');
+}
 
 function setup() {
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
     rectMode(CENTER);
+    imageMode(CENTER);
 
     camera = {
         x: 0,
@@ -16,8 +23,6 @@ function setup() {
     }
 
     loadLevel();
-
-    
 }
 
 function update() {

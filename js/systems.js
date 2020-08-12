@@ -72,7 +72,9 @@ function moveEntity(entity) {
 function drawEntities() {
     for (let i = 0; i < entities.length; i++) {
         const entity = entities[i];
-        if (entity.position && entity.size) {
+        if(entity.position && entity.size && entity.img) {
+            image(entity.img, entity.position.x - camera.x, entity.position.y - camera.y);
+        } else if (entity.position && entity.size) {
             if (entity.color) {
                 fill(entity.color);
             }
