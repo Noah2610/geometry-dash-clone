@@ -1,0 +1,17 @@
+{
+  "name": "geometry-dash-clone",
+  "version": "1.0.0",
+  "description": "By Lukas and Noah!",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoserLukas2004/geometry-dash-clone.git"
+  },
+  "author": "Moser Lukas",
+  "license": "MIT",
+  "homepage": "https://github.com/MoserLukas2004/geometry-dash-clone#readme",
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
+}
