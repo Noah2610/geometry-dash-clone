@@ -18,6 +18,7 @@ function setup() {
     createCanvas(SCREEN_SIZE.width, SCREEN_SIZE.height);
     rectMode(CENTER);
     imageMode(CENTER);
+    angleMode(DEGREES);
 
     camera = {
         x: 0,

@@ -71,20 +71,28 @@ function moveEntity(entity) {
 // if the enity has a color.
 function drawEntities() {
     for (let i = 0; i < entities.length; i++) {
+        push();
         const entity = entities[i];
-        if(entity.position && entity.size && entity.img) {
-            image(entity.img, entity.position.x - camera.x, entity.position.y - camera.y);
-        } else if (entity.position && entity.size) {
-            if (entity.color) {
-                fill(entity.color);
-            }
+        if(entity.position) {
+            translate(entity.position.x - camera.x, entity.position.y - camera.y);
+        }
+
+        if(entity.rotate) {
+            rotate(entity.rotate);
+        }
+
+        if(entity.size && entity.img) {
+            image(entity.img, 0, 0);
+        } else if (entity.size && entity.color) {
+            fill(entity.color);
             rect(
-                entity.position.x - camera.x,
-                entity.position.y - camera.y,
+                0,
+                0,
                 entity.size.w,
                 entity.size.h,
             );
-        }
+        } 
+        pop();
     }
 }
 

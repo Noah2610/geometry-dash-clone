@@ -18,6 +18,7 @@ class Player {
         this.solid = new Solid();
         this.canJump = true;
         this.img = assets.playerImg;
+        this.rotate = 45;
     }
 
     update() {
