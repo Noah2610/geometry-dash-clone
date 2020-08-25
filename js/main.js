@@ -4,12 +4,14 @@ let camera;
 let img;
 let assets = {
     blockImg: null,
-    playerImg: null
+    playerImg: null,
+    levelOne: null
 };
 
 function preload() {
     assets.blockImg = loadImage('images/Block.png');
     assets.playerImg = loadImage('images/Player.png');
+    assets.levelOne = loadStrings('level/level1.txt');
 }
 
 function setup() {
@@ -22,13 +24,17 @@ function setup() {
         y: 0
     }
 
-    loadLevel();
+    loadLevel(assets.levelOne);
 }
 
 function update() {
-    player.update();
-    camera.x = player.position.x - width / 2;
-    camera.y = player.position.y - height / 2;
+    if(player) {
+        player.update();
+        camera.x = player.position.x - width / 2;
+        camera.y = player.position.y - height / 2;
+    } else {
+        throw new Error("Player doesn't exist");
+    }
 
     for(let i = 0; i < entities.length; i++) {
         applyGravity(entities[i]);
