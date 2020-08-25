@@ -131,3 +131,29 @@ function checkJump(entity) {
         }
     }
 }
+
+function checkPlayerRotate(entity) {
+    if(entity.canJump) {
+        let shouldRotate = false;
+        const checkEntity = {
+            position: {
+                x: entity.position.x,
+                y: entity.position.y + 1
+            },
+            size: entity.size
+        }
+        for(let i = 0; i < entities.length; i++) {
+            if(entity.id !== entities[i].id && doEntitiesCollide(checkEntity, entities[i])) {
+                shouldRotate = false;
+                break;
+            } else {
+                shouldRotate = true;
+            }
+        }
+        if(shouldRotate) {
+            entity.rotate += 5;
+        } else {
+            entity.rotate = entity.rotate - (entity.rotate % 90);
+        }
+    }
+}

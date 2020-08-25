@@ -41,6 +41,7 @@ function update() {
         applyGravity(entities[i]);
         moveEntity(entities[i]);
         checkJump(entities[i]);
+        checkPlayerRotate(entities[i]);
     }
 }
 
