@@ -19,6 +19,7 @@ class Player {
         this.canJump = true;
         this.img = assets.playerImg;
         this.rotate = 0;
+        this.player = true;
     }
 
     update() {

@@ -133,7 +133,7 @@ function checkJump(entity) {
 }
 
 function checkPlayerRotate(entity) {
-    if(entity.canJump) {
+    if(entity.player) {
         let shouldRotate = false;
         const checkEntity = {
             position: {
@@ -159,17 +159,23 @@ function checkPlayerRotate(entity) {
 }
 
 function checkGoal(entity) {
-    for(let i = 0; i < entities.length; i++) {
-        if(entity.id !== entities[i].id && entities[i].goal && doEntitiesCollide(entity, entities[i])) {
-            state = "gameover";
+    if(entity.player) {
+        for(let i = 0; i < entities.length; i++) {
+            if(entity.id !== entities[i].id && entities[i].goal && doEntitiesCollide(entity, entities[i])) {
+                state = "gameover";
+                break;
+            }
         }
     }
 }
 
 function handleSpike(entity) {
-    for(let i = 0; i < entities.length; i++) {
-        if(entity.id !== entities[i].id && entities[i].enemy && doEntitiesCollide(entity, entities[i])) {
-            state = "gameover";
+    if(entity.player){
+        for(let i = 0; i < entities.length; i++) {
+            if(entity.id !== entities[i].id && entities[i].enemy && doEntitiesCollide(entity, entities[i])) {
+                state = "gameover";
+                break;
+            }
         }
     }
 }
