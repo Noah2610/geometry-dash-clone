@@ -5,12 +5,14 @@ let img;
 let assets = {
     blockImg: null,
     playerImg: null,
+    goalImg: null,
     levelOne: null
 };
 
 function preload() {
     assets.blockImg = loadImage('images/Block.png');
     assets.playerImg = loadImage('images/Player.png');
+    assets.goalImg = loadImage('images/Goal.png');    
     assets.levelOne = loadStrings('level/level1.txt');
 }
 
@@ -42,6 +44,7 @@ function update() {
         moveEntity(entities[i]);
         checkJump(entities[i]);
         checkPlayerRotate(entities[i]);
+        checkGoal(entities[i]);
     }
 }
 

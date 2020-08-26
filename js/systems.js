@@ -157,3 +157,11 @@ function checkPlayerRotate(entity) {
         }
     }
 }
+
+function checkGoal(entity) {
+    for(let i = 0; i < entities.length; i++) {
+        if(entity.id !== entities[i].id && entities[i].goal && doEntitiesCollide(entity, entities[i])) {
+            location.reload();
+        }
+    }
+}

@@ -1,7 +1,8 @@
 const tiles = {
     empty: "-",
     block: "#",
-    player: "P"
+    player: "P",
+    goal: "|"
 }
 
 const tile_size = {
@@ -28,6 +29,9 @@ function loadLevel(rows) {
                 case tiles.player:
                     player = new Player(pos.x, pos.y);
                     entities.push(player);
+                    break;
+                case tiles.goal:
+                    entities.push(new Goal(pos.x, pos.y));
                     break;
                 default:
                     console.log("Level-character is wrong: " + tile);
