@@ -5,9 +5,6 @@
         <title>Geometry Dash clone</title>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5"></script>
         <style>
-            #start {
-                
-            }
             #menu {
                 width: 800px;
                 height: 400px;
@@ -35,6 +32,9 @@
             .menu-button:active {
                 box-shadow: inset 0 0 4px 1px;
             }
+            .hidden {
+                display: none !important;
+            }
         </style>
     </head>
     <body>
@@ -44,10 +44,10 @@
 
             </div>
             <div class="menu-item">
-                <button id="start" class="menu-button">Start</button>
+                <button id="start-button" class="menu-button">Start</button>
             </div>
             <div class="menu-item">
-                <button id="quit" class="menu-button">Quit</button>
+                <button id="quit-button" class="menu-button">Quit</button>
             </div>
         </div>
     </main>

@@ -1,8 +1,11 @@
 let player;
 let entities = [];
-let camera;
+let camera = {
+    x: 0,
+    y: 0
+};
 let img;
-let state = "running";
+let state = "menu";
 let assets = {
     blockImg: null,
     playerImg: null,
@@ -23,12 +26,27 @@ function setup() {
     imageMode(CENTER);
     angleMode(DEGREES);
 
-    camera = {
-        x: 0,
-        y: 0
-    }
+    //loadLevel(assets.levelOne);
 
+    const startButton = document.getElementById("start-button");
+
+    startButton.addEventListener("click", startGame);
+}
+
+function startGame() {
     loadLevel(assets.levelOne);
+    state = "running";
+
+    const menu = document.getElementById("menu");
+    menu.classList.add("hidden");
+}
+
+function startMenu() {
+    entities = [];
+    state = "menu";
+
+    const menu = document.getElementById("menu");
+    menu.classList.remove("hidden");
 }
 
 function update() {
@@ -51,6 +69,7 @@ function update() {
         }
     } else if (state === "gameover") {
         //location.reload();
+        startMenu();
     }
 }
 
