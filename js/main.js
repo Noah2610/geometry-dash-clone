@@ -44,6 +44,7 @@ function update() {
         moveEntity(entities[i]);
         checkJump(entities[i]);
         checkPlayerRotate(entities[i]);
+        handleSpike(entities[i]);
         checkGoal(entities[i]);
     }
 }

@@ -165,3 +165,11 @@ function checkGoal(entity) {
         }
     }
 }
+
+function handleSpike(entity) {
+    for(let i = 0; i < entities.length; i++) {
+        if(entity.id !== entities[i].id && entities[i].enemy && doEntitiesCollide(entity, entities[i])) {
+            location.reload();
+        }
+    }
+}

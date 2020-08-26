@@ -1,6 +1,7 @@
 const tiles = {
     empty: "-",
     block: "#",
+    spike: "S",
     player: "P",
     goal: "|"
 }
@@ -25,6 +26,9 @@ function loadLevel(rows) {
                     break;
                 case tiles.block:
                     entities.push(new Block(pos.x, pos.y));
+                    break;
+                case tiles.spike:
+                    entities.push(new Spike(pos.x, pos.y));
                     break;
                 case tiles.player:
                     player = new Player(pos.x, pos.y);
