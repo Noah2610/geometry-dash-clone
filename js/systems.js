@@ -179,3 +179,21 @@ function handleSpike(entity) {
         }
     }
 }
+
+function checkCollisionRight(entity) {
+    if(entity.player) {
+        const newPos = {
+            x: entity.position.x + 1,
+            y: entity.position.y
+        }
+        const tmpEntity = {
+            position: newPos,
+            size: entity.size
+        }
+        for(let i = 0; i < entities.length; i++) {
+            if(entity.id !== entities[i].id && doEntitiesCollide(tmpEntity, entities[i])) {
+                state = "gameover";
+            }
+        }
+    }
+}

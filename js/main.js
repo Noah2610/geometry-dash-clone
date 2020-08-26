@@ -65,10 +65,10 @@ function update() {
             checkJump(entities[i]);
             checkPlayerRotate(entities[i]);
             handleSpike(entities[i]);
+            checkCollisionRight(entities[i]);
             checkGoal(entities[i]);
         }
     } else if (state === "gameover") {
-        //location.reload();
         startMenu();
     }
 }
