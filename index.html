@@ -4,8 +4,54 @@
         <meta charset="UTF-8">
         <title>Geometry Dash clone</title>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/p5"></script>
+        <style>
+            #start {
+                
+            }
+            #menu {
+                width: 800px;
+                height: 400px;
+                position: absolute;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+            .menu-item {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+            .menu-button {
+                font-size: 24px;
+                padding: 8px 16px;
+                border-radius: 3px;
+                border: none;
+                box-shadow: 0 0 3px 1px;
+            }
+            .menu-button:hover, .menu-button:focus {
+                box-shadow: 0 0 6px 2px;
+            }
+            .menu-button:active {
+                box-shadow: inset 0 0 4px 1px;
+            }
+        </style>
     </head>
     <body>
+    <main>
+        <div id="menu">
+            <div class="menu-item">
+
+            </div>
+            <div class="menu-item">
+                <button id="start" class="menu-button">Start</button>
+            </div>
+            <div class="menu-item">
+                <button id="quit" class="menu-button">Quit</button>
+            </div>
+        </div>
+    </main>
+
         <script type="text/javascript" src="./js/settings.js"></script>
         <script type="text/javascript" src="./js/entities/player.js"></script>
         <script type="text/javascript" src="./js/entities/block.js"></script>

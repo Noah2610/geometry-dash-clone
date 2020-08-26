@@ -2,6 +2,7 @@ let player;
 let entities = [];
 let camera;
 let img;
+let state = "running";
 let assets = {
     blockImg: null,
     playerImg: null,
@@ -31,21 +32,25 @@ function setup() {
 }
 
 function update() {
-    if(player) {
-        player.update();
-        camera.x = player.position.x - width / 2;
-        camera.y = player.position.y - height / 2;
-    } else {
-        throw new Error("Player doesn't exist");
-    }
+    if(state === "running") {
+        if(player) {
+            player.update();
+            camera.x = player.position.x - width / 2;
+            camera.y = player.position.y - height / 2;
+        } else {
+            throw new Error("Player doesn't exist");
+        }
 
-    for(let i = 0; i < entities.length; i++) {
-        applyGravity(entities[i]);
-        moveEntity(entities[i]);
-        checkJump(entities[i]);
-        checkPlayerRotate(entities[i]);
-        handleSpike(entities[i]);
-        checkGoal(entities[i]);
+        for(let i = 0; i < entities.length; i++) {
+            applyGravity(entities[i]);
+            moveEntity(entities[i]);
+            checkJump(entities[i]);
+            checkPlayerRotate(entities[i]);
+            handleSpike(entities[i]);
+            checkGoal(entities[i]);
+        }
+    } else if (state === "gameover") {
+        //location.reload();
     }
 }
 
