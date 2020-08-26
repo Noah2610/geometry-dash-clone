@@ -1,4 +1,4 @@
-class Block {
+class Spike {
     constructor(x, y) {
         this.position = {
             x: x,
@@ -9,7 +9,6 @@ class Block {
             h: 32,
         };
         this.color = [255, 0, 0];
-        this.solid = new Solid();
-        this.img = assets.blockImg;
+        this.enemy = true;
     }
 }
