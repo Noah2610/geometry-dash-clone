@@ -5,7 +5,7 @@ class Player {
             y: posY,
         };
         this.size = {
-            w: 32,
+            w: 16,
             h: 32,
         };
         this.velocity = {
