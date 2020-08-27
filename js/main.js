@@ -25,6 +25,7 @@ function setup() {
     rectMode(CENTER);
     imageMode(CENTER);
     angleMode(DEGREES);
+    frameRate(FPS);
 
     const startButton = document.getElementById("start-button");
 
