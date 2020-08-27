@@ -59,7 +59,7 @@ function startMenu() {
 }
 
 function update() {
-    dt = deltaTime / (1000.0 / FPS);
+    dt = deltaTime / (1000.0 / 60.0);
 
     if (state === "running") {
         if (player) {
