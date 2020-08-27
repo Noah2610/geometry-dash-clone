@@ -2,7 +2,7 @@ let player;
 let entities = [];
 let camera = {
     x: 0,
-    y: 0
+    y: 0,
 };
 let img;
 let state = "menu";
@@ -10,14 +10,14 @@ let assets = {
     blockImg: null,
     playerImg: null,
     goalImg: null,
-    levelOne: null
+    levelOne: null,
 };
 
 function preload() {
-    assets.blockImg = loadImage('images/Block.png');
-    assets.playerImg = loadImage('images/Player.png');
-    assets.goalImg = loadImage('images/Goal.png');    
-    assets.levelOne = loadStrings('level/level1.txt');
+    assets.blockImg = loadImage("images/Block.png");
+    assets.playerImg = loadImage("images/Player.png");
+    assets.goalImg = loadImage("images/Goal.png");
+    assets.levelOne = loadStrings("level/level1.txt");
 }
 
 function setup() {
@@ -26,11 +26,16 @@ function setup() {
     imageMode(CENTER);
     angleMode(DEGREES);
 
-    //loadLevel(assets.levelOne);
-
     const startButton = document.getElementById("start-button");
 
     startButton.addEventListener("click", startGame);
+    document.addEventListener("keyup", (e) => {
+        if (state === "menu") {
+            if (String.fromCharCode(e.keyCode) === " ") {
+                startGame();
+            }
+        }
+    });
 }
 
 function startGame() {
@@ -50,8 +55,8 @@ function startMenu() {
 }
 
 function update() {
-    if(state === "running") {
-        if(player) {
+    if (state === "running") {
+        if (player) {
             player.update();
             camera.x = player.position.x - width / 2;
             camera.y = player.position.y - height / 2;
@@ -59,7 +64,7 @@ function update() {
             throw new Error("Player doesn't exist");
         }
 
-        for(let i = 0; i < entities.length; i++) {
+        for (let i = 0; i < entities.length; i++) {
             applyGravity(entities[i]);
             moveEntity(entities[i]);
             checkJump(entities[i]);
