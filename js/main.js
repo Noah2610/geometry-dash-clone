@@ -13,6 +13,9 @@ let assets = {
     levelOne: null,
 };
 
+// Deltatime, where 1.0 is the target frame rate.
+let dt = 1.0;
+
 function preload() {
     assets.blockImg = loadImage("images/Block.png");
     assets.playerImg = loadImage("images/Player.png");
@@ -56,6 +59,8 @@ function startMenu() {
 }
 
 function update() {
+    dt = deltaTime / (1000.0 / FPS);
+
     if (state === "running") {
         if (player) {
             player.update();
