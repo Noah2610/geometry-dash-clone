@@ -125,7 +125,7 @@ function checkJump(entity) {
                 );
             });
             if (isStandingOnGround) {
-                entity.velocity.y = -5;
+                entity.velocity.y = JUMP_VELOCITY;
             }
         }
     }
@@ -153,7 +153,7 @@ function checkPlayerRotate(entity) {
             }
         }
         if (shouldRotate) {
-            entity.rotate += 5;
+            entity.rotate += JUMP_ROTATE_STEP;
         } else {
             entity.rotate = entity.rotate - (entity.rotate % 90);
         }
