@@ -155,7 +155,7 @@ function checkPlayerRotate(entity) {
         if (shouldRotate) {
             entity.rotate += JUMP_ROTATE_STEP;
         } else {
-            entity.rotate = entity.rotate - (entity.rotate % 90);
+            entity.rotate = round(entity.rotate / 90.0) * 90.0;
         }
     }
 }
